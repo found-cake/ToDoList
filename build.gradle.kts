@@ -5,18 +5,26 @@ plugins {
 group = "io.github.found_cake"
 version = "1.0-SNAPSHOT"
 
+fun kotlinw(target: String): String{
+    val version = "18.2.0-pre.573"
+    return "org.jetbrains.kotlin-wrappers:kotlin-$target:$version"
+}
+
+fun kotlinw(target: String, version: String): String
+    = "org.jetbrains.kotlin-wrappers:kotlin-$target:$version"
+
 repositories {
     mavenCentral()
 }
 
 dependencies {
-    implementation("org.jetbrains.kotlin-wrappers:kotlin-react:18.2.0-pre.346")
-    implementation("org.jetbrains.kotlin-wrappers:kotlin-react-dom:18.2.0-pre.346")
-    implementation("org.jetbrains.kotlin-wrappers:kotlin-emotion:11.9.3-pre.346")
+    implementation(kotlinw("react"))
+    implementation(kotlinw("react-dom"))
+    implementation(kotlinw("emotion", "11.11.1-pre.583"))
 }
 
 kotlin {
-    js {
+    js(IR) {
         binaries.executable()
         browser {
             commonWebpackConfig {
